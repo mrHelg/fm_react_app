@@ -60,8 +60,10 @@ class App extends Component {
     const { users, isAlphabet } = this.state;
     const sortUsers = JSON.parse(JSON.stringify(users));
     sortUsers.sort((prev, next) => {
-      
-      return isAlphabet ? next.fname > prev.fname : prev.fname < next.fname;
+      if (isAlphabet) {
+        return next.fname > prev.fname ? 1 : -1;
+      }
+      return next.fname < prev.fname ? 1 : -1;
     });
     this.setState({
       isAlphabet: !isAlphabet,
